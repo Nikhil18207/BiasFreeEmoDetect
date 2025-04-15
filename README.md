@@ -1,76 +1,115 @@
-# BiasFreeEmoDetect
-"BiasCorrectEmoRec" enhances emotion recognition by integrating facial images and physiological signals while mitigating biases in AI models. Using deep learning, it ensures fair and accurate detection across diverse demographics. This project aims to improve reliability and ethical AI practices in emotion analysis.
+🎭 Bias-Free Emotion Recognition using Deep Learning
+This project aims to build an accurate, fair, and explainable emotion recognition model using facial images. The focus is on addressing demographic bias (gender, age, country) while maintaining high classification performance.
 
-📌 Project: Bias-Free Emotion Recognition Using Deep Learning
-✅ Dataset Setup
-Used a facial emotion dataset organized by set_id folders with 8 emotions: Anger, Contempt, Disgust, Fear, Happy, Neutral, Sad, Surprised
+📂 Dataset
+Facial Emotion Dataset (folder format):
+images/set_id/*.jpg
 
-Merged with metadata (gender, age, country) from emotions.csv
+Each set_id contains 8 facial emotion images: Anger, Contempt, Disgust, Fear, Happy, Neutral, Sad, Surprised
 
-🔍 Bias Analysis
-Identified imbalance:
+Metadata CSV:
+emotions.csv containing set_id, gender, age, and country
 
-More female samples than male
+🧪 Bias Analysis
+Gender Imbalance: More FEMALE samples than MALE
 
-Overrepresentation from Russia (RU)
+Country Bias: Overrepresentation from Russia (RU)
 
-Few samples for teen & mid-age groups
+Age Gaps: Few samples from Teen, Mid-Age, and Senior age groups
 
-Emotion distribution was balanced, but skewed by gender/country
+Emotion classes were balanced, but demographically skewed
 
-🔁 Bias-Aware Augmentation
-Applied targeted augmentations to minority groups (MALE, PH, IN, Teen, Mid-Age)
+🔁 Bias-Aware Data Augmentation
+To address the imbalance, targeted augmentations were applied to:
 
-Techniques: Horizontal flip, brightness, rotation, blur, noise
+MALE faces
 
-Dataset size increased:
-From 152 → 552 samples for balanced representation
+Underrepresented countries: IN, PH
 
-🔄 DataLoader + Preprocessing
-Created a custom PyTorch Dataset class
+Age groups: Teen, Mid-Age, Senior
 
-Applied transformations (Resize → Normalize → Augment)
+Augmentation techniques used:
 
-Dataloader working: torch.Size([32, 3, 224, 224]) verified ✅
+Horizontal flip
 
-🧠 Model 1: Custom CNN
-Built and trained from scratch
+Brightness/contrast adjustment
 
-Used class-weighted CrossEntropyLoss
+Rotation
 
-Accuracy after 20 epochs: 99.82%
+Blur
 
-Final evaluation:
+Gaussian noise
 
-✅ Confusion Matrix = perfect
+➡️ Dataset expanded from 152 → 552 samples
 
-✅ Classification Report = Precision/Recall/F1 ~ 1.00
+⚙️ Preprocessing & DataLoader
+Images resized to 224x224
 
-✅ AUC-ROC = 1.00 (macro & per-class)
+Normalized using ImageNet mean/std
+
+PyTorch Dataset class with on-the-fly augmentations
+
+Verified with DataLoader: torch.Size([32, 3, 224, 224])
+
+🧠 Model 1: Custom CNN (from Scratch)
+Built a simple CNN with:
+
+3 Convolution layers
+
+BatchNorm, MaxPooling
+
+2 Fully Connected layers
+
+Dropout for regularization
+
+Trained with:
+
+Weighted CrossEntropyLoss
+
+Adam Optimizer
+
+20 Epochs
+
+🎯 Final Accuracy: 99.82%
+📈 Evaluation:
+
+Precision/Recall/F1: ~1.00
+
+AUC-ROC (Macro): 1.00
+
+Confusion Matrix: Perfect
 
 🤖 Model 2: ResNet18 (Pretrained)
-Loaded and fine-tuned full ResNet18
+Loaded ResNet18 via torchvision.models
+
+Modified final layer for 8 emotion classes
+
+Fine-tuned all layers (no freezing)
 
 Added:
 
-Class weights
+Class weights for fairness
 
-Learning rate scheduler
+Learning rate scheduler (StepLR)
 
-Full fine-tuning (no frozen layers)
+🧠 Trained for 20 Epochs
+🎯 Final Accuracy: 99.82%
 
-Accuracy after 20 epochs: 99.82%
+📈 Evaluation in progress...
 
-Evaluation step in progress...
+🚀 What’s Next
+✅ Evaluate ResNet18 (Confusion Matrix, AUC, Report)
 
-🟢 Next:
-Evaluate ResNet18 (Confusion Matrix + AUC + Report)
+🔜 Train Model 3: MobileNetV2 (lightweight & fast)
 
-Train Model 3: MobileNetV2
+📊 Compare all 3 models side-by-side
 
-Compare all 3 models side-by-side
+🎨 Add Grad-CAM visualizations for interpretability
 
-Add Grad-CAM & Gender-Wise Fairness Analysis (optional)
+⚖️ Analyze fairness across gender (accuracy parity)
 
-Deploy or document for paper/presentation
+📦 Optional: Deploy using Streamlit or Gradio
+
+💡 Goal
+To build a robust, fair, and explainable deep learning model for facial emotion recognition that works equally well across genders, ages, and regions.
 
