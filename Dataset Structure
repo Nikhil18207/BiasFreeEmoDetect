@@ -1,0 +1,25 @@
+# 📂 Dataset Folder Structure
+
+This document outlines the folder structure of the dataset used for the **Bias-Free Emotion Recognition using Deep Learning** project. The dataset is stored in the directory `C:\Users\ASUS\FacialEmo\images` and consists of subfolders representing `set_id` from 1 to 18, each containing images for 8 facial emotions.
+
+---
+
+## 🌟 Overview
+
+- **Root Directory**: `C:\Users\ASUS\FacialEmo\images`
+- **Subfolders**: Each subfolder is named with a `set_id` (e.g., `1`, `2`, ..., `18`).
+- **Images per Subfolder**: Each `set_id` folder contains 8 images, one for each emotion:
+  - Anger
+  - Contempt
+  - Disgust
+  - Fear
+  - Happy
+  - Neutral
+  - Sad
+  - Surprised
+
+---
+
+## 📁 Folder Structure
+
+Below is the detailed structure of the dataset:
